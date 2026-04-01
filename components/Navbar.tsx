@@ -13,7 +13,7 @@ const Navbar = () => {
     { label: "Add New", href: "/book/new"}
   ]
   return (
-    <header className="w-full fixed z-50 bg-('--bg-primary)">
+    <header className="w-full fixed z-50 bg-(--bg-primary)">
         <div className="max-w-7xl px-5 mx-auto w-full py-4 flex justify-between items-center h-(--navbar-height)`">
           <Link href="/" className="flex gap-0.5 items-center">
             <Image 
