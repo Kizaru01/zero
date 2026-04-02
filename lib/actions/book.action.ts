@@ -8,6 +8,22 @@ import BookSegment from "@/database/models/book-segment.model";
 
 export const getAllbooks = async () => {
 
+    try {
+        await connectToDB();
+
+        const books = await Book.find().sort({ createdAt: -1 }).lean();
+        return {
+            success: true,
+            data: serializeData(books),
+        }
+    } catch (error) {
+        console.error("Error Connecting to database", error)
+
+        return {
+            success: false,
+            error: error,
+        }
+    }
 }
 export const checkBookExist = async (title: string) => {
     try {

@@ -64,7 +64,7 @@ const UploadForm = () => {
             const pdfFile = data.pdfFile;
 
             const parsedPDF = await parsePDFFile(pdfFile);
-
+            
             if(parsedPDF.content.length === 0){
                 toast.error("Failed to parse PDF content. Please try again with a different file.");
                 form.reset();
@@ -73,7 +73,7 @@ const UploadForm = () => {
 
             const uploadedPdfBlob = await upload(fileTitle, pdfFile, {
                 access: 'public',
-                handleUploadUrl: 'api/upload',
+                handleUploadUrl: '/api/upload',
                 contentType: 'application/pdf',
             });
 
@@ -82,9 +82,9 @@ const UploadForm = () => {
 
             if(data.coverImage){
                 const coverFile = data.coverImage;
-                const uploadedCoverBlob = await upload(`{fileTitle}_cover.png`, coverFile, {
+                const uploadedCoverBlob = await upload(`${fileTitle}_cover.png`, coverFile, {
                     access: 'public',
-                    handleUploadUrl: 'api/upload', 
+                    handleUploadUrl: '/api/upload', 
                     contentType: coverFile.type
                 })
                 coverUrl = uploadedCoverBlob.url;
@@ -92,9 +92,9 @@ const UploadForm = () => {
                 const response = await fetch(parsedPDF.cover)
                 const blob = await response.blob();
                 
-                const uploadedCoverBlob = await upload(`{fileTitle}_cover.png`, blob, {
+                const uploadedCoverBlob = await upload(`${fileTitle}_cover.png`, blob, {
                     access: 'public',
-                    handleUploadUrl: 'api/upload', 
+                    handleUploadUrl: '/api/upload', 
                     contentType: 'image/png'
                 })
                 
